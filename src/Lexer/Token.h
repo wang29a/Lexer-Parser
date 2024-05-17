@@ -37,14 +37,15 @@ public:
 
   friend std::ostream& operator<<(std::ostream& os, const Token& obj){
     std::string type;
-    if (obj.type != TokenType::ID) {
+    if (obj.type != TokenType::ID && obj.type != TokenType::NUMBER) {
       type = obj.text;
-    }else {
+    }else if (obj.type == TokenType::NUMBER) {
+      type = "NUMBER";
+    }else{
       type = "ID";
     }
     std::string out = fmt::format("token type : {}, text : {}", type, obj.text);
-    std::cout<<out<<"\n";
-    // os << out;
+    os << out;
     return os;
   }
 
