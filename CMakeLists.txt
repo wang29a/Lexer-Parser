@@ -1,29 +1,25 @@
 cmake_minimum_required(VERSION 3.12)
 project(WangCompilers VERSION 0.1.0 LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-include(CTest)
-enable_testing()
+set(CMAKE_C_COMPILE clang)
+# set(CMAKE_CXX_COMPILE clang++)
 
+add_subdirectory(src)
 add_executable(WangCompilers main.cpp)
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+target_link_libraries(WangCompilers PRIVATE Lexer)
 
-# Compiler flags.
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Werror")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-unused-parameter -Wno-attributes") # TODO: remove
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb -fsanitize=${BUSTUB_SANITIZER} -fno-omit-frame-pointer -fno-optimize-sibling-calls")
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
-message(STATUS "CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
-message(STATUS "CMAKE_EXE_LINKER_FLAGS: ${CMAKE_EXE_LINKER_FLAGS}")
-message(STATUS "CMAKE_SHARED_LINKER_FLAGS: ${CMAKE_SHARED_LINKER_FLAGS}")
-add_subdirectory(src)
 target_include_directories(WangCompilers PUBLIC
-                          "${PROJECT_BINARY_DIR}"
-                          "${PROJECT_SOURCE_DIR}/src"
-                          )
+"${PROJECT_BINARY_DIR}"
+"${PROJECT_SOURCE_DIR}/src"
+"${PROJECT_SOURCE_DIR}/src/Lexer")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+SET (CMAKE_CXX_FLAGS_INIT                "-Wall -std=c++20")
+target_compile_options(WangCompilers PRIVATE -Wall -Wextra -Wpedantic -O2 -ggdb)
+
+find_package(fmt REQUIRED)
+
+target_link_libraries(WangCompilers PRIVATE fmt::fmt)
