@@ -1,10 +1,11 @@
 #include "WangLexer.h"
 #include "Token.h"
+#include "header.h"
 #include <memory>
 
 auto WangLexer::nextToken() -> std::shared_ptr<Token>{
     if (pos == input.length()) {
-        return std::make_shared<Token>(TokenType::END_OF_FILE, "EOF");
+        return Token::EOF_TOKEN;
     }
     std::shared_ptr<Token> token = nullptr;
     if (std::isspace(peek)) {
@@ -14,53 +15,53 @@ auto WangLexer::nextToken() -> std::shared_ptr<Token>{
     } else if (std::isdigit(peek)) {
         token = NUMBER();
     } else if (peek == '=') {
-        token = std::make_shared<Token>(TokenType::EQ, "=");
+        token = Token::EQ_TOKEN;
         advance();
     } else if (peek == '>') {
         advance();
         if (peek == '=') {
-            token = std::make_shared<Token>(TokenType::GE, ">=");
+            token = Token::GE_TOKEN;
             advance();
         } else {
-            token = std::make_shared<Token>(TokenType::GT, ">");
+            token = Token::GT_TOKEN;
         }
     } else if (peek == '<') {
         advance();
         if (peek == '=') {
-            token = std::make_shared<Token>(TokenType::LE, "<=");
+            token = Token::LE_TOKEN;
             advance();
         } else if (peek == '>') {
-            token = std::make_shared<Token>(TokenType::NE, "<>");
+            token = Token::NE_TOKEN;
             advance();
         } else {
-            token = std::make_shared<Token>(TokenType::LT, "<");
+            token = Token::LT_TOKEN;
         }
     } else if (peek == '.') {
-        token = std::make_shared<Token>(TokenType::DOT, ".");
+        token = Token::DOT_TOKEN;
         advance();
     } else if (peek == '+') {
-        token = std::make_shared<Token>(TokenType::POS, "+");
+        token = Token::POS_TOKEN;
         advance();
     } else if (peek == '-') {
-        token = std::make_shared<Token>(TokenType::NEG, "-");
+        token = Token::NEG_TOKEN;
         advance();
     } else if (peek == '*'){
-        token = std::make_shared<Token>(TokenType::MUL, "*");
+        token = Token::MUL_TOKEN;
         advance();
     } else if (peek == '/'){
-        token = std::make_shared<Token>(TokenType::DIV, "/");
+        token = Token::DIV_TOKEN;
         advance();
     } else if (peek == ';'){
-        token = std::make_shared<Token>(TokenType::SEM, ";");
+        token = Token::SEM_TOKEN;
         advance();
     } else if (peek == '('){
-        token = std::make_shared<Token>(TokenType::LB, "(");
+        token = Token::LB_TOKEN;
         advance();
     } else if (peek == ')'){
-        token = std::make_shared<Token>(TokenType::RB, ")");
+        token = Token::RB_TOKEN;
         advance();
     } else if (peek == '#'){
-        token = std::make_shared<Token>(TokenType::HAS, "#");
+        token = Token::HAS_TOKEN;
         advance();
     } else {
         token = std::make_shared<Token>(TokenType::UNKNOWN, std::string(1, peek));

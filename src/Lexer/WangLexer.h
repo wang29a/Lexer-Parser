@@ -4,11 +4,12 @@
 #include "header.h"
 #include <cctype>
 #include <memory>
-#include <type_traits>
 
 class WangLexer : Lexer{
 public:
-  WangLexer(std::string input) :Lexer(input){};
+  WangLexer(std::string input) :Lexer(input){
+    kwTable = std::make_shared<KeywordTable>();
+  };
   auto nextToken() ->std::shared_ptr<Token>;
 
 private:
@@ -17,7 +18,7 @@ private:
     while (std::isspace(peek)) {
       advance();
     }
-    return std::make_shared<Token>(TokenType::WS, "");
+    return Token::WS_TOKEN;
   }
   auto ID() -> std::shared_ptr<Token>{
     std::string sb;

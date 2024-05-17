@@ -20,7 +20,7 @@ enum class TokenType {
   // LA(2)
   EQ, NE, LT, LE, GT, GE,
   ADD, SUB, MUL, DIV, 
-  SLA, SEM, LB, RB, HAS,
+  SEM, LB, RB, HAS,
 
   // Group 3
   // arbitrary LA

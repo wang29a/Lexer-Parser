@@ -22,3 +22,10 @@ const std::shared_ptr<Token> Token::GE_TOKEN = std::make_shared<Token>(TokenType
 const std::shared_ptr<Token> Token::DOT_TOKEN = std::make_shared<Token>(TokenType::DOT, ".");
 const std::shared_ptr<Token> Token::POS_TOKEN = std::make_shared<Token>(TokenType::POS, "+");
 const std::shared_ptr<Token> Token::NEG_TOKEN = std::make_shared<Token>(TokenType::NEG, "-");
+
+const std::shared_ptr<Token> Token::MUL_TOKEN = std::make_shared<Token>(TokenType::MUL, "*");
+const std::shared_ptr<Token> Token::DIV_TOKEN = std::make_shared<Token>(TokenType::DIV, "/");
+const std::shared_ptr<Token> Token::SEM_TOKEN = std::make_shared<Token>(TokenType::SEM, ";");
+const std::shared_ptr<Token> Token::LB_TOKEN = std::make_shared<Token>(TokenType::LB, "(");
+const std::shared_ptr<Token> Token::RB_TOKEN = std::make_shared<Token>(TokenType::RB, ")");
+const std::shared_ptr<Token> Token::HAS_TOKEN = std::make_shared<Token>(TokenType::HAS, "#");
