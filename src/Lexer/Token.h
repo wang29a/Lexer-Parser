@@ -34,6 +34,7 @@ public:
 
   Token(TokenType type, const std::string& text);
   auto getText() const -> std::string;
+  auto getType() const -> std::string;
 
   friend std::ostream& operator<<(std::ostream& os, const Token& obj){
     std::string type;

@@ -1,9 +1,19 @@
 #include "Token.h"
+#include "header.h"
 
 Token::Token(TokenType type, const std::string& text) : type(type), text(text) {}
 
 std::string Token::getText() const {
     return text;
+}
+std::string Token::getType() const {
+    if (type != TokenType::ID || type != TokenType::NUMBER) {
+        return text;
+    }else if (type == TokenType::ID) {
+        return "ID";
+    }else {
+        return "NUMBER";
+    }
 }
 
 const std::shared_ptr<Token> Token::EOF_TOKEN = std::make_shared<Token>(TokenType::END_OF_FILE, "EOF");
