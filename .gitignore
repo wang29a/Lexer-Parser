@@ -2,5 +2,6 @@
 output
 build
 .cache
+test
 
 compile_commands.json
