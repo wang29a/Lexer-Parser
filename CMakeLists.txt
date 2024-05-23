@@ -10,11 +10,16 @@ add_subdirectory(src)
 add_executable(WangCompilers main.cpp)
 
 target_link_libraries(WangCompilers PRIVATE Lexer)
+target_link_libraries(WangCompilers PRIVATE LL)
+target_link_libraries(WangCompilers PRIVATE LR)
 
 target_include_directories(WangCompilers PUBLIC
 "${PROJECT_BINARY_DIR}"
 "${PROJECT_SOURCE_DIR}/src"
-"${PROJECT_SOURCE_DIR}/src/Lexer")
+"${PROJECT_SOURCE_DIR}/src/Lexer"
+"${PROJECT_SOURCE_DIR}/src/LL"
+"${PROJECT_SOURCE_DIR}/src/LR"
+)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 SET (CMAKE_CXX_FLAGS_INIT                "-Wall -std=c++20")
